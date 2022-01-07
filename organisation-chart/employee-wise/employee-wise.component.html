@@ -1,0 +1,75 @@
+<!-- <div class="row">
+    <div class="col">
+        <div *ngFor="let employee of showData;let i = index">
+            <p class="text-left m-2 p-0">
+                <a (click)="plus=!plus;minus=!minus;" data-toggle="collapse" href="#employeeCollapse{{i}}" role="button"
+                    aria-expanded="false" aria-controls="collapseExample" style="text-decoration:none;color:black;">
+                    <span [hidden]="plus" class="mr-2"><svg width="14" height="14" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z" />
+                        </svg></span>
+                    <span [hidden]="minus" class="mr-2"><svg width="14" height="14" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-12v-2h12v2z" />
+                        </svg></span>
+                    <span><svg height="12pt" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" width="12pt">
+                            <g transform="matrix(.1 0 0 -.1 0 24)">
+                                <path
+                                    d="m82 224c-25-17-29-60-8-89 18-25 74-25 92 0 31 42 3 105-46 105-9 0-26-7-38-16z" />
+                                <path
+                                    d="m65 88c-29-16-44-40-45-65 0-22 3-23 100-23s100 1 100 23c-1 60-95 100-155 65z" />
+                            </g>
+                        </svg></span>
+                    {{ employee.employeeName }}
+                </a>
+            </p>
+            <div *ngFor="let reportee of employee.reportees;let j = index;" class="collapse" id="employeeCollapse{{i}}">
+                <p class="text-left ml-5">{{ employee.reportees[j].employeeName }}</p>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+<!--Testing-->
+<ng-container *ngTemplateOutlet="recursiveList; context:{ list: showData }"></ng-container>
+
+<ng-template #recursiveList let-list="list">
+    <div class="row">
+        <div class="col">
+            <div *ngFor="let item of list">
+                <p class="text-left m-2 p-0" >
+                    <a (click)="item.hideReportees = !item.hideReportees;showDetails(item.employeeId)" role="button" style="text-decoration: none; color: black;cursor:pointer;">
+                        <span *ngIf="!item.hideReportees && item.reportees.length>0; else elseBlock">
+                            <span class="mr-2"><svg width="14" height="14" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z" />
+                            </svg></span>
+                        </span>
+                        <ng-template #elseBlock>
+                            <ng-container *ngIf="item.reportees.length>0">
+                                <span class="mr-2"><svg width="14" height="14" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-12v-2h12v2z" />
+                                </svg></span>
+                            </ng-container>                          
+                        </ng-template>
+                        <span><svg height="12pt" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" width="12pt">
+                                <g transform="matrix(.1 0 0 -.1 0 24)">
+                                    <path
+                                        d="m82 224c-25-17-29-60-8-89 18-25 74-25 92 0 31 42 3 105-46 105-9 0-26-7-38-16z" />
+                                    <path
+                                        d="m65 88c-29-16-44-40-45-65 0-22 3-23 100-23s100 1 100 23c-1 60-95 100-155 65z" />
+                                </g>
+                            </svg></span>
+                        {{item.employeeName}}
+                    </a>
+                </p>
+                <div *ngIf="item.reportees.length>0" [hidden]="!item.hideReportees">
+                    <div class="ml-4"><ng-container *ngTemplateOutlet="recursiveList; context:{ list: item.reportees }"></ng-container></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

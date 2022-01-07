@@ -1,0 +1,36 @@
+<div style="font-size: smaller">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <!--card starts-->
+            <div class="card border-secondary text-center">
+                <div class="card-body" style="padding: 0.5rem">
+                    <p class="card-text">
+                        With supporting text below as a natural lead-in to additional content.
+                    </p>
+                </div>
+            </div>
+            <!--card ends-->
+        </div>
+        <div class="col"></div>
+    </div>
+
+    <div class="vertical" style="border-left: 2px solid black;height: 16px;position: absolute;left: 50%;"></div>
+    <div class="horizontal" style="border-bottom: 2px solid black; height: 16px"></div>
+
+    <div id="children">
+        <div class="row">
+            <div *ngFor="let item of count" class="col-sm-4">
+                <!--card starts-->
+                <div class="card border-secondary text-center mt-2 mb-2">
+                    <div class="card-body" style="padding: 0.5rem">
+                        <p class="card-text">
+                            With supporting text below as a natural lead-in to additional content.
+                        </p>
+                    </div>
+                </div>
+                <!--card ends-->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<!--Header for view Options-->
+<div class="row mt-2 mb-2 pl-4 pr-4 text-center border border-dark pt-1 pb-1">
+    <!--Display Options-->
+    <div class="col-sm-4" style="height:24px;z-index:2;">
+        <p>
+            <a data-toggle="collapse" href="#displayOptions" role="button" aria-expanded="false" aria-controls="displayOptions" style="text-decoration: none;color: black;z-index:3;">
+                Display Options
+            </a>
+        </p>
+        <div class="collapse text-left p-1" id="displayOptions" style="background-color: white;width: 250px;">
+            <style>
+                span:hover
+                {
+                    color: green;
+                }
+            </style>
+            <a (click)="view(1)" [hidden]="one" data-toggle="collapse" href="#displayOptions" role="button" aria-expanded="true" aria-controls="displayOptions" style="color: black; text-decoration:none;font-size:12px;cursor:pointer;"><p class="m-0"><span>Employee Wise</span></p></a>
+            <a (click)="view(2)" [hidden]="two" data-toggle="collapse" href="#displayOptions" role="button" aria-expanded="true" aria-controls="displayOptions" style="color: black; text-decoration:none;font-size:12px;cursor:pointer;"><p class="m-0"><span>Location Wise</span></p></a>
+            <a (click)="view(3)" [hidden]="three" data-toggle="collapse" href="#displayOptions" role="button" aria-expanded="true" aria-controls="displayOptions" style="color: black; text-decoration:none;font-size:12px;cursor:pointer;"><p class="m-0"><span>Function+Employee Wise Vertical</span></p></a>
+            <a (click)="view(4)" [hidden]="four" data-toggle="collapse" href="#displayOptions" role="button" aria-expanded="true" aria-controls="displayOptions" style="color: black; text-decoration:none;font-size:12px;cursor:pointer;"><p class="m-0"><span>Function+Department Wise Vertical</span></p></a>
+            <a (click)="view(5)" [hidden]="five" data-toggle="collapse" href="#displayOptions" role="button" aria-expanded="true" aria-controls="displayOptions" style="color: black; text-decoration:none;font-size:12px;cursor:pointer;"><p class="m-0"><span>Function Wise Horizontal</span></p></a>
+        </div>
+    </div>
+    <!--Display Options end-->
+    <!--Show all-->
+    <div class="col-sm-3" style="height:24px;">
+        <a href="#" style="color: black; text-decoration: none">
+            <span><svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm7 14h-5v5h-4v-5h-5v-4h5v-5h4v5h5v4z"/></svg></span>
+            Show All
+        </a>
+    </div>
+    <!--Show all end-->
+    <!--Hide All-->
+    <div class="col-sm-3" style="height:24px;">
+        <a href="#" style="color: black; text-decoration: none"> 
+            <span><svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm7 14h-14v-4h14v4z"/></svg></span>
+            Hide All
+        </a>
+    </div>
+    <!--Hide All end-->
+    <!--Search Bar-->
+    <div class="col-sm-2" style="height:24px;">
+        <p>
+            <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="text-decoration: none;color: black;z-index:3;">
+                Search
+            </a>
+        </p>
+        <div class="collapse" id="collapseExample">
+            <input class="form-control" placeholder="Search">
+        </div>
+    </div>
+    <!--Search Bar end-->
+</div>
+<!--Header for view Options end-->
+
+
+
+<!--Display-->
+<div class="row mt-2 mb-2 pl-4 pr-4 text-center pt-1 pb-1" style="height:auto">
+    <ng-container *ngIf="showView === 1;else second">
+        <app-employee-wise></app-employee-wise>
+    </ng-container>
+    <ng-template #second>
+        <ng-container *ngIf="showView === 2;else third">
+            <app-location-wise></app-location-wise>
+        </ng-container>
+    </ng-template>
+    <ng-template #third>
+        <ng-container *ngIf="showView === 3;else fourth">
+            <app-function-employee-wise-vertical></app-function-employee-wise-vertical>
+        </ng-container>
+    </ng-template>
+    <ng-template #fourth>
+        <ng-container *ngIf="showView === 4;else fifth">
+            <app-function-department-wise-vertical></app-function-department-wise-vertical>
+        </ng-container>
+    </ng-template>
+    <ng-template #fifth>
+        <ng-container *ngIf="showView === 5;else default">
+            <app-function-wise-horizontal></app-function-wise-horizontal>
+        </ng-container>
+    </ng-template>
+    <ng-template #default>
+        <ng-container>
+            <app-employee-wise></app-employee-wise>
+        </ng-container>
+    </ng-template>
+</div>
+<!--Display end-->
+
